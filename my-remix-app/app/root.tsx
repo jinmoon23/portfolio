@@ -1,4 +1,9 @@
 import { Links, Meta, Outlet, Scripts } from '@remix-run/react';
+import Index from './routes/_index';
+import type { LinksFunction } from '@remix-run/node';
+import styles from '~/styles/tailwind.css?url';
+
+export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }];
 
 export default function App() {
   return (
@@ -10,6 +15,7 @@ export default function App() {
       </head>
       <body>
         <h1>Hello! World ㅎㅎ</h1>
+        {/* <Index /> */}
         <Outlet />
         <Scripts />
       </body>

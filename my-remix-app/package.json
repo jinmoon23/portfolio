@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.16.7",
+    "tailwindcss": "^4.1.7",
     "vite": "^6.3.5"
   }
 }
