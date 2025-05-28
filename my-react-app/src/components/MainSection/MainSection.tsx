@@ -39,7 +39,11 @@ const MainSection = () => {
         </div>
       </div>
 
-      <PageNavigation onPageChange={handlePageChange} />
+      <PageNavigation
+        onPageChange={handlePageChange}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </main>
   );
 };

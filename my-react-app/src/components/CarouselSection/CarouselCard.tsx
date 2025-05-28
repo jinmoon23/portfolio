@@ -26,11 +26,11 @@ const CarouselCard = ({
   >
     {/* 텍스트 영역 */}
     <div className="px-8 pt-10 pb-4 z-10">
+      <div className="mb-2 text-2xl font-bold leading-tight">{title}</div>
+      <div className="mb-2 text-lg font-medium opacity-80">{subtitle}</div>
       <div className="mb-2 text-base font-semibold opacity-80">
         {serviceName}
       </div>
-      <div className="mb-2 text-2xl font-bold leading-tight">{title}</div>
-      <div className="mb-2 text-lg font-medium opacity-80">{subtitle}</div>
     </div>
     {/* 이미지 영역 */}
     <div className="flex-1 flex justify-center w-full">
