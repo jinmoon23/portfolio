@@ -1,61 +1,21 @@
-import { useRef } from 'react';
-import Carousel from './Carousel';
+import { useRef } from "react";
+import Carousel from "./Carousel";
 
 const CarouselSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (!containerRef.current) return;
-    const scrollAmount = 400;
-    containerRef.current.scrollLeft +=
-      direction === 'left' ? -scrollAmount : scrollAmount;
-  };
-
   return (
-    <section className='mt-16 px-8 relative'>
-      <h2 className='text-5xl font-bold mb-8 mt-24'>알면 알수록, 진문.</h2>
-      <Carousel containerRef={containerRef} />
-      <div className='absolute bottom-4 right-8 flex gap-2'>
-        <button
-          onClick={() => handleScroll('left')}
-          className='w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors'
-          aria-label='왼쪽으로 이동'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
-            stroke='currentColor'
-            className='w-6 h-6'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M15.75 19.5L8.25 12l7.5-7.5'
-            />
-          </svg>
-        </button>
-        <button
-          onClick={() => handleScroll('right')}
-          className='w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors'
-          aria-label='오른쪽으로 이동'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
-            stroke='currentColor'
-            className='w-6 h-6'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M8.25 4.5l7.5 7.5-7.5 7.5'
-            />
-          </svg>
-        </button>
+    <section className="relative py-24 px-8 overflow-hidden">
+      {/* 상단 장식 라인 */}
+
+      <h2 className="text-5xl font-bold mb-10 mt-10 text-center relative z-10">
+        알면 알수록, 진문.
+      </h2>
+      <div className="relative z-10">
+        <Carousel containerRef={containerRef} />
+      </div>
+      <div className="flex justify-center mt-2 z-10 relative">
+        <span className="animate-bounce text-3xl text-gray-400">↓</span>
       </div>
     </section>
   );

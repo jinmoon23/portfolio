@@ -1,11 +1,11 @@
 import Fullpage, {
   FullPageSections,
   FullpageSection,
-} from '@ap.cx/react-fullpage';
-import Header from './components/Header/Header';
-import MainSection from './components/MainSection/MainSection';
-import CarouselSection from './components/CarouselSection/CarouselSection';
-import SkillSection from './components/SkillSection/SkillSection';
+} from "@ap.cx/react-fullpage";
+import Header from "./components/Header/Header";
+import MainSection from "./components/MainSection/MainSection";
+import CarouselSection from "./components/CarouselSection/CarouselSection";
+import SkillSection from "./components/SkillSection/SkillSection";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Header />
           <MainSection />
         </FullpageSection>
-        <FullpageSection>
+        <FullpageSection className="flex justify-center items-center h-screen">
           <CarouselSection />
         </FullpageSection>
         <FullpageSection>

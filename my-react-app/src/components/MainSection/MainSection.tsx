@@ -1,24 +1,45 @@
-import NextButton from './NextButton';
+import { useRef, useState } from "react";
+import FirstPage from "./FirstPage";
+import SecondPage from "./SecondPage";
+import PageNavigation from "./PageNavigation";
 
 const MainSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = 2;
+
+  const handlePageChange = (direction: "prev" | "next") => {
+    if (containerRef.current) {
+      const newPage =
+        direction === "next"
+          ? Math.min(currentPage + 1, totalPages - 1)
+          : Math.max(currentPage - 1, 0);
+
+      const containerWidth = containerRef.current.offsetWidth;
+      containerRef.current.scrollTo({
+        left: containerWidth * newPage,
+        behavior: "smooth",
+      });
+      setCurrentPage(newPage);
+    }
+  };
+
   return (
-    <main className='relative flex justify-center items-center bg-[#faf7f4] rounded-3xl mx-8 h-[600px]'>
-      {/* Mac mini 이미지 자리 */}
-      <div className='flex flex-col items-center justify-center w-full h-full'>
-        <div className='w-[95%] h-[90%] bg-gray-300 rounded-3xl flex items-end justify-center overflow-hidden shadow-xl'>
-          <video
-            src='/portfolio.mp4'
-            className='w-full h-full object-cover'
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+    <main className="relative flex items-center justify-center bg-black rounded-3xl mx-4 md:mx-8 h-screen min-h-[700px] max-h-[700px] overflow-hidden">
+      {/* 컨텐츠 컨테이너 */}
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-16 py-12">
+        <div className="w-full overflow-x-hidden" ref={containerRef}>
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{ transform: `translateX(-${currentPage * 100}%)` }}
+          >
+            <FirstPage />
+            <SecondPage currentPage={currentPage} />
+          </div>
         </div>
       </div>
-      <div className='absolute bottom-8 right-8'>
-        <NextButton />
-      </div>
+
+      <PageNavigation onPageChange={handlePageChange} />
     </main>
   );
 };

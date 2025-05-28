@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from "react";
 
 interface ModalProps {
   card: {
     title: string;
     subtitle: string;
+    serviceName?: string;
     img: string;
     bg?: string;
     text?: string;
@@ -12,60 +13,63 @@ interface ModalProps {
 }
 
 const Modal = ({ card, onClose }: ModalProps) => {
-  const [top, setTop] = useState(0);
-
   useEffect(() => {
-    // 모달이 열릴 때 body 스크롤 막기
-    document.body.style.overflow = 'hidden';
-
-    const handlePosition = () => {
-      const modalHeight = 600;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const viewportHeight = window.innerHeight;
-      setTop(scrollY + viewportHeight / 2 - modalHeight / 2);
-    };
-    handlePosition();
-    window.addEventListener('scroll', handlePosition);
-    window.addEventListener('resize', handlePosition);
-
-    // cleanup 함수
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = 'unset';
-      window.removeEventListener('scroll', handlePosition);
-      window.removeEventListener('resize', handlePosition);
+      document.body.style.overflow = "unset";
     };
   }, []);
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <>
-      {/* 블러 및 회색 오버레이 */}
-      <div
-        className='fixed inset-0 z-40 bg-gray-800 bg-opacity-40 backdrop-blur-sm'
-        onClick={onClose}
-      />
+    <div
+      className="fixed inset-0 z-40 flex items-center justify-center"
+      onClick={handleBackdropClick}
+    >
       {/* 모달 */}
-      <div
-        className='fixed inset-0 z-50 flex items-center justify-center'
-        style={{ top: `${top}px` }}
-      >
-        <div
-          className='relative bg-white rounded-3xl shadow-2xl p-12 w-[90vw] max-w-[1200px]'
-          onClick={(e) => e.stopPropagation()}
+      <div className="relative bg-white rounded-3xl shadow-2xl w-[95vw] max-w-[1100px] min-h-[420px] flex flex-col p-0 overflow-hidden">
+        {/* 닫기 버튼 */}
+        <button
+          className="absolute top-6 right-6 text-3xl text-black"
+          onClick={onClose}
         >
-          <div className='mb-6 text-2xl font-semibold'>{card.title}</div>
-          <div className='mb-8 text-4xl font-bold'>{card.subtitle}</div>
-          <div className='h-[500px] flex items-center justify-center bg-gray-200 rounded-2xl mb-8'>
-            {card.img}
+          ×
+        </button>
+        {/* 텍스트 영역 */}
+        <div className="px-12 pt-16 pb-4">
+          <div className="mb-2 text-base font-semibold opacity-80 flex items-center gap-2">
+            <span>{card.serviceName}</span>
           </div>
-          <button
-            className='absolute top-6 right-6 text-gray-500 hover:text-black text-3xl'
-            onClick={onClose}
-          >
-            ×
-          </button>
+          <div className="mb-2 text-2xl font-bold leading-tight flex items-center gap-2">
+            {card.title}
+          </div>
+          <div className="mb-2 text-3xl font-extrabold leading-tight flex items-center gap-2">
+            {card.subtitle}
+          </div>
         </div>
+        {/* 이미지 영역 */}
+        <div className="flex-1 flex items-center justify-center w-full px-12 pb-8">
+          <img
+            src={card.img}
+            alt={card.title}
+            className="object-contain w-full h-[320px] rounded-2xl bg-gray-100 shadow border-4 border-white"
+            draggable={false}
+          />
+        </div>
+        {/* 자세히 보기 버튼 */}
+        <button
+          className="absolute bottom-8 right-12 px-6 py-2 rounded-full bg-black/80 text-white text-base font-semibold shadow-lg hover:bg-black/90 transition-colors"
+          onClick={() => window.open("https://github.com", "_blank")}
+        >
+          자세히 보기
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 
