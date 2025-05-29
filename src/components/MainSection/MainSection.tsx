@@ -32,7 +32,7 @@ const MainSection = () => {
   }, [currentPage]);
 
   return (
-    <main className="relative flex items-center justify-center bg-black dark:bg-gray-900 rounded-3xl mx-4 md:mx-8 h-screen min-h-[700px] max-h-[700px] overflow-hidden transition-colors">
+    <main className="relative flex items-center justify-center bg-black dark:bg-gray-900 rounded-2xl sm:rounded-3xl mx-2 sm:mx-4 md:mx-8 h-screen min-h-[500px] sm:min-h-[600px] md:min-h-[700px] max-h-[500px] sm:max-h-[600px] md:max-h-[700px] overflow-hidden transition-colors">
       {/* 비디오 배경 - currentPage가 1일 때만 표시 */}
       {currentPage === 1 && (
         <video
@@ -41,14 +41,14 @@ const MainSection = () => {
           muted
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover rounded-3xl z-0"
+          className="absolute inset-0 w-full h-full object-cover rounded-2xl sm:rounded-3xl z-0"
         >
           <source src="video.mp4" type="video/mp4" />
         </video>
       )}
 
       {/* 컨텐츠 컨테이너 */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-16 py-12 h-full">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-8 md:px-16 py-6 sm:py-8 md:py-12 h-full">
         <div className="w-full h-full overflow-x-hidden" ref={containerRef}>
           <div
             className="flex h-full transition-transform duration-500 ease-in-out"
@@ -63,7 +63,7 @@ const MainSection = () => {
             <div className="w-full h-full flex-shrink-0 overflow-y-auto overflow-x-hidden relative flex items-end justify-center pb-4">
               <div className="relative z-10">
                 <motion.span
-                  className="text-3xl text-white transition-colors drop-shadow-lg block"
+                  className="text-2xl sm:text-3xl text-white transition-colors drop-shadow-lg block"
                   animate={{
                     y: [0, -10, 0],
                   }}

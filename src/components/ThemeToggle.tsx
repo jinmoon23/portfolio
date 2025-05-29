@@ -4,15 +4,15 @@ const ThemeToggle = ({ className = "" }: { className?: string }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="fixed bottom-0 left-2 z-[9999]">
+    <div className="fixed bottom-0 left-0 sm:left-2 z-[9999]">
       <button
         onClick={toggleTheme}
-        className={`m-8 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors ${className}`}
+        className={`m-4 sm:m-6 md:m-8 p-2 sm:p-3 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors ${className}`}
         aria-label="테마 전환"
       >
         {theme === "light" ? (
           <svg
-            className="w-6 h-6 text-gray-800"
+            className="w-5 h-5 sm:w-6 sm:h-6 text-gray-800"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -26,7 +26,7 @@ const ThemeToggle = ({ className = "" }: { className?: string }) => {
           </svg>
         ) : (
           <svg
-            className="w-6 h-6 text-yellow-300"
+            className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-300"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"

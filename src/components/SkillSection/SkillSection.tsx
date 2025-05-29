@@ -84,13 +84,13 @@ const skills = [
 ];
 
 const SkillSection = () => (
-  <section className="bg-gray-50 dark:bg-gray-900 py-10 px-4 transition-colors">
-    <div className="flex justify-between items-center mb-12">
-      <h2 className="text-5xl font-bold text-gray-900 dark:text-gray-100 transition-colors">
+  <section className="bg-gray-50 dark:bg-gray-900 py-6 sm:py-8 md:py-10 px-4 sm:px-6 md:px-8 transition-colors">
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-10 md:mb-12 gap-4 sm:gap-0">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 transition-colors">
         이 기술들을 사용해요!
       </h2>
     </div>
-    <div className="flex gap-6 flex-wrap justify-center">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-5 md:gap-6 justify-items-center">
       {skills.map((skill, idx) => (
         <SkillCard key={idx} {...skill} />
       ))}

@@ -18,7 +18,7 @@ const CarouselCard = ({
   onClick,
 }: Props) => (
   <div
-    className={`relative min-w-[320px] max-w-[340px] h-[600px] rounded-[2.5rem] overflow-hidden p-0 flex flex-col justify-between shadow-lg ${bg} ${text} flex-shrink-0 cursor-pointer transition-transform duration-200 will-change-transform hover:scale-105 active:scale-105`}
+    className={`relative min-w-[280px] sm:min-w-[320px] max-w-[300px] sm:max-w-[340px] h-[500px] sm:h-[600px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden p-0 flex flex-col justify-between shadow-lg ${bg} ${text} flex-shrink-0 cursor-pointer transition-transform duration-200 will-change-transform hover:scale-105 active:scale-105`}
     tabIndex={0}
     onClick={onClick}
     style={{
@@ -28,10 +28,14 @@ const CarouselCard = ({
     }}
   >
     {/* 텍스트 영역 */}
-    <div className="px-8 pt-10 pb-4 z-10">
-      <div className="mb-2 text-2xl font-bold leading-tight">{title}</div>
-      <div className="mb-2 text-lg font-medium opacity-80">{subtitle}</div>
-      <div className="mb-2 text-base font-semibold opacity-80">
+    <div className="px-6 sm:px-8 pt-6 sm:pt-10 pb-3 sm:pb-4 z-10">
+      <div className="mb-2 text-lg sm:text-2xl font-bold leading-tight">
+        {title}
+      </div>
+      <div className="mb-2 text-base sm:text-lg font-medium opacity-80">
+        {subtitle}
+      </div>
+      <div className="mb-2 text-sm sm:text-base font-semibold opacity-80">
         {serviceName}
       </div>
     </div>
@@ -40,13 +44,13 @@ const CarouselCard = ({
       <img
         src={img}
         alt={title}
-        className="object-cover w-full h-[360px] rounded-b-[2.5rem] select-none pointer-events-none"
+        className="object-cover w-full h-[300px] sm:h-[360px] rounded-b-[2rem] sm:rounded-b-[2.5rem] select-none pointer-events-none"
         draggable={false}
       />
     </div>
     {/* + 버튼 */}
     <button
-      className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-black/40 flex items-center justify-center text-white text-2xl shadow-lg backdrop-blur"
+      className="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 flex items-center justify-center text-white text-lg sm:text-2xl shadow-lg backdrop-blur"
       tabIndex={-1}
       aria-label="더보기"
     >
