@@ -14,7 +14,7 @@ const PageNavigation = ({
   return (
     <>
       {/* 좌측 하단 화살표 - 항상 표시 */}
-      <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 right-[15%] sm:right-[12%] md:right-[10%] z-10">
+      <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 right-[25%] sm:right-[20%] md:right-[15%] lg:right-[10%] z-10">
         <NextButton
           direction="prev"
           onClick={() => onPageChange("prev")}
@@ -23,7 +23,7 @@ const PageNavigation = ({
       </div>
 
       {/* 우측 하단 화살표 - 항상 표시 */}
-      <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 right-6 sm:right-8 md:right-12 z-10">
+      <div className="absolute bottom-6 sm:bottom-8 md:bottom-12 right-4 sm:right-6 md:right-8 lg:right-12 z-10">
         <NextButton
           direction="next"
           onClick={() => onPageChange("next")}

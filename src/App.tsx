@@ -22,7 +22,7 @@ function App() {
                 <Header />
                 <MainSection />
               </div>
-              <div className="section flex justify-center items-center h-screen">
+              <div className="section h-screen">
                 <CarouselSection />
               </div>
               <div className="section">
