@@ -5,6 +5,7 @@ interface Props {
   img: string;
   bg?: string;
   text?: string;
+  onClick?: () => void;
 }
 
 const CarouselCard = ({
@@ -14,10 +15,12 @@ const CarouselCard = ({
   img,
   bg = "bg-white",
   text = "",
+  onClick,
 }: Props) => (
   <div
     className={`relative min-w-[320px] max-w-[340px] h-[600px] rounded-[2.5rem] overflow-hidden p-0 flex flex-col justify-between shadow-lg ${bg} ${text} flex-shrink-0 cursor-pointer transition-transform duration-200 will-change-transform hover:scale-105 active:scale-105`}
     tabIndex={0}
+    onClick={onClick}
     style={{
       transformOrigin: "center",
       marginTop: "16px",

@@ -11,7 +11,7 @@ function App() {
       credits={{ enabled: false }}
       render={() => {
         return (
-          <div id="fullpage">
+          <div id="fullpage" style={{ zIndex: 1 }}>
             <div className="section">
               <Header />
               <MainSection />
