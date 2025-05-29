@@ -6,7 +6,7 @@ const GithubLink = () => {
       href="https://github.com/jinmoon23"
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-300"
+      className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-300 relative z-20 cursor-pointer"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
