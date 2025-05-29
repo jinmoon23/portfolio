@@ -13,6 +13,7 @@ function App() {
       <ReactFullpage
         scrollingSpeed={1000}
         credits={{ enabled: false }}
+        scrollOverflow={true}
         render={() => {
           return (
             <div id="fullpage" style={{ zIndex: 1 }}>
