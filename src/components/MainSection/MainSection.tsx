@@ -8,6 +8,7 @@ const MainSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const totalPages = 3;
 
   const handlePageChange = (direction: "prev" | "next") => {
@@ -17,6 +18,18 @@ const MainSection = () => {
         : Math.max(currentPage - 1, 0);
     setCurrentPage(newPage);
   };
+
+  // 모바일 감지
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // 비디오 재생 관리
   useEffect(() => {
@@ -43,7 +56,10 @@ const MainSection = () => {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover rounded-2xl sm:rounded-3xl z-0"
         >
-          <source src="video.mp4" type="video/mp4" />
+          <source
+            src={isMobile ? "video_m.mp4" : "video.mp4"}
+            type="video/mp4"
+          />
         </video>
       )}
 

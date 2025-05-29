@@ -1,12 +1,21 @@
 import { motion } from "framer-motion";
 
-const GithubLink = () => {
+interface GithubLinkProps {
+  variant?: "default" | "contact";
+}
+
+const GithubLink = ({ variant = "default" }: GithubLinkProps) => {
+  const defaultClassName =
+    "flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-300 relative z-20 cursor-pointer";
+  const contactClassName =
+    "flex items-center gap-2 border-2 border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black px-4 py-2 rounded-lg transition-colors duration-300 relative z-20 cursor-pointer";
+
   return (
     <motion.a
       href="https://github.com/jinmoon23"
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center gap-2 text-white/90 hover:text-white transition-colors duration-300 relative z-20 cursor-pointer"
+      className={variant === "contact" ? contactClassName : defaultClassName}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.8 }}
@@ -23,7 +32,9 @@ const GithubLink = () => {
           clipRule="evenodd"
         />
       </svg>
-      <span className="text-base sm:text-lg"></span>
+      <span className="text-base sm:text-lg">
+        {variant === "contact" ? "GitHub" : ""}
+      </span>
     </motion.a>
   );
 };
