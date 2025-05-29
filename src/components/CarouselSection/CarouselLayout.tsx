@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CarouselCard from "./CarouselCard";
 import ProjectContent from "./ProjectContent";
 import type { CardData } from "./CarouselContent";
@@ -6,10 +6,19 @@ import type { CardData } from "./CarouselContent";
 interface CarouselLayoutProps {
   containerRef: React.RefObject<HTMLDivElement | null>;
   cardData: CardData[];
+  onSelectionChange?: (isSelected: boolean) => void;
 }
 
-const CarouselLayout = ({ containerRef, cardData }: CarouselLayoutProps) => {
+const CarouselLayout = ({
+  containerRef,
+  cardData,
+  onSelectionChange,
+}: CarouselLayoutProps) => {
   const [selected, setSelected] = useState<null | number>(null);
+
+  useEffect(() => {
+    onSelectionChange?.(selected !== null);
+  }, [selected, onSelectionChange]);
 
   return (
     <div className="relative w-full flex flex-col items-center">

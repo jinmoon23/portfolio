@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Carousel from "./Carousel";
 
 const CarouselSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isSlideActive, setIsSlideActive] = useState(false);
 
   return (
     <section className="relative py-24 px-8 overflow-hidden">
@@ -12,11 +13,16 @@ const CarouselSection = () => {
         알면 알수록, 진문.
       </h2>
       <div className="relative z-10">
-        <Carousel containerRef={containerRef} />
+        <Carousel
+          containerRef={containerRef}
+          onSelectionChange={setIsSlideActive}
+        />
       </div>
-      <div className="flex justify-center mt-2 z-10 relative">
-        <span className="animate-bounce text-3xl text-gray-400">↓</span>
-      </div>
+      {!isSlideActive && (
+        <div className="flex justify-center mt-2 z-10 relative">
+          <span className="animate-bounce text-3xl text-gray-400">↓</span>
+        </div>
+      )}
     </section>
   );
 };
