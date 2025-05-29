@@ -5,7 +5,7 @@ import MailLink from "./MailLink";
 
 const FirstPage = () => {
   return (
-    <div className="w-full h-full flex flex-col justify-center px-2 sm:px-4">
+    <div className="w-full h-full flex flex-col justify-center px-2 sm:px-4 bg-transparent dark:bg-black transition-colors">
       <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 lg:gap-6 flex-grow justify-center">
         {/* 첫 번째 줄 - 왼쪽 정렬 */}
         <div className="flex w-full pl-[2rem] sm:pl-[3rem] md:pl-[4rem] lg:pl-[5rem] items-center relative group">

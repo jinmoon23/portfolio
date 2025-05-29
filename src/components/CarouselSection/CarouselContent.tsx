@@ -3,6 +3,9 @@ export interface ProjectContent {
   projectName: string;
   roles: string[];
   description: string[];
+  videoUrl?: string;
+  imageUrl?: string;
+  isVerticalVideo?: boolean;
 }
 
 export interface CardData {
@@ -25,6 +28,7 @@ export const cardData: CardData[] = [
     projectContent: {
       period: "2025.01 ~ 2025.02",
       projectName: "SSAFY 2학기 자율 프로젝트 달디단",
+      videoUrl: "daldidan.mp4",
       roles: [
         "Next.js와 TypeScript를 활용한 웹 애플리케이션 개발",
         "React Query를 활용한 서버 상태 관리",
@@ -49,6 +53,7 @@ export const cardData: CardData[] = [
     projectContent: {
       period: "2025.03 ~ 2025.04",
       projectName: "SSAFY 2학기 특화 프로젝트 ***또가게***",
+      imageUrl: "Ttho.png",
       roles: [
         "Next.js를 활용한 React web 구성, WebView를 적용한 react-native(android) 환경 구성",
         "postMessage를 통한 web ↔ native 간 통신 구성(native 환경 내 전화번호부 접근 트리거 및 저장소, 위치, 알림 등에 대한 접근 권한 동의 트리거)",
@@ -74,6 +79,7 @@ export const cardData: CardData[] = [
     projectContent: {
       period: "2024.07 ~ 2024.08",
       projectName: "SSAFY 1학기 공통 프로젝트 AiTalk",
+      imageUrl: "AiTalk.png",
       roles: [
         "Spring Boot를 활용한 백엔드 API 개발",
         "React와 TypeScript를 활용한 프론트엔드 개발",
@@ -97,6 +103,8 @@ export const cardData: CardData[] = [
     projectContent: {
       period: "2024.01 ~ 2024.02",
       projectName: "내일배움캠프 배포 프로젝트 떡볶이4U",
+      videoUrl: "tteok.mp4",
+      isVerticalVideo: true,
       roles: [
         "React와 TypeScript를 활용한 프론트엔드 개발",
         "Firebase를 활용한 실시간 데이터베이스 구축",
