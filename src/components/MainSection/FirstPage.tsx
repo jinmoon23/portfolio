@@ -19,7 +19,7 @@ const FirstPage = () => {
           </motion.h1>
           <div className="ml-4">
             <HoverImage
-              src="/Shopping online.png"
+              src="Shopping online.png"
               alt="Interactive"
               tooltipText={[
                 "최상의 유저 경험을 제공하기 위해",
@@ -45,7 +45,7 @@ const FirstPage = () => {
         <div className="flex justify-end items-center relative group">
           <div className="mr-4">
             <HoverImage
-              src="/plus.png"
+              src="plus.png"
               alt="Performance"
               tooltipText={[
                 "장시간 고도의 집중력을 유지하기 위해선 체력이 필수적입니다.",
@@ -76,7 +76,7 @@ const FirstPage = () => {
           </motion.h1>
           <div className="ml-4">
             <HoverImage
-              src="/improvement.png"
+              src="improvement.png"
               alt="Improvement"
               tooltipText={[
                 "지속적인 성장을 위해 매일 학습하고,",

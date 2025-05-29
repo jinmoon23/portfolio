@@ -20,7 +20,7 @@ export const cardData: CardData[] = [
     title: "SSAFY 12th, 자율 프로젝트",
     subtitle: "쉽게 사용하고. 쉽게 확인하고",
     serviceName: "달디단",
-    img: "/daldidan.png",
+    img: "daldidan.png",
     bg: "bg-gradient-to-br from-blue-500 via-purple-500 to-pink-400",
     projectContent: {
       period: "2025.01 ~ 2025.02",
@@ -43,7 +43,7 @@ export const cardData: CardData[] = [
     title: "SSAFY 12th, 특화 프로젝트",
     subtitle: "더 쉽게, 마음까지 담아",
     serviceName: "또가게",
-    img: "/Ttho.png",
+    img: "Ttho.png",
     bg: "bg-gradient-to-br from-teal-300 via-blue-300 to-indigo-400",
     text: "text-white",
     projectContent: {
@@ -69,7 +69,7 @@ export const cardData: CardData[] = [
     title: "SSAFY 12th, 공통 프로젝트",
     subtitle: "태그하고, 보여주고, 대화하고",
     serviceName: "AiTalk",
-    img: "/AiTalk.png",
+    img: "AiTalk.png",
     bg: "bg-gradient-to-br from-orange-400 via-yellow-300 to-pink-300",
     projectContent: {
       period: "2024.07 ~ 2024.08",
@@ -92,7 +92,7 @@ export const cardData: CardData[] = [
     title: "내일배움캠프 배포 프로젝트",
     subtitle: "떡볶이 좋아하는사람 여기 모여라!",
     serviceName: "떡볶이4U",
-    img: "/TTEOK_2.png",
+    img: "TTEOK_2.png",
     bg: "bg-gradient-to-br from-purple-400 via-blue-400 to-indigo-500",
     projectContent: {
       period: "2024.01 ~ 2024.02",
