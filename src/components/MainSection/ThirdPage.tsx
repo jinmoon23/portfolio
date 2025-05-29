@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 
 // fullPage API 타입 확장
 declare global {
@@ -30,7 +30,7 @@ const images = [
   "about/13.jpeg",
 ];
 
-// 각 이미지마다 다른 애니메이션 시작점 생성
+// 각 이미지마다 다른 애니메이션 시작점 생성 - 메모이제이션으로 최적화
 const getRandomTransform = (index: number) => {
   const directions = [
     { x: -100, y: -50, rotate: -15 },
@@ -51,10 +51,92 @@ const getRandomTransform = (index: number) => {
   return directions[index % directions.length];
 };
 
+// 이미지 컴포넌트 메모이제이션
+const OptimizedImage = ({
+  src,
+  index,
+  isVisible,
+  randomTransform,
+}: {
+  src: string;
+  index: number;
+  isVisible: boolean;
+  randomTransform: { x: number; y: number; rotate: number };
+}) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleImageLoad = useCallback(() => {
+    setImageLoaded(true);
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+  }, []);
+
+  // 애니메이션 스타일 메모이제이션
+  const animationStyle = useMemo(
+    () => ({
+      transitionDelay: isVisible ? `${index * 80}ms` : "0ms",
+      transform: !isVisible
+        ? `translate3d(${randomTransform.x}px, ${randomTransform.y}px, 0) rotate(${randomTransform.rotate}deg) scale3d(0.75, 0.75, 1)`
+        : "translate3d(0, 0, 0) rotate(0deg) scale3d(1, 1, 1)",
+      willChange: isVisible ? "transform, opacity" : "auto",
+    }),
+    [isVisible, index, randomTransform]
+  );
+
+  const imageStyle = useMemo(
+    () => ({
+      transform: isHovered ? "scale3d(1.1, 1.1, 1)" : "scale3d(1, 1, 1)",
+      filter: isHovered ? "brightness(1.1)" : "brightness(1)",
+      willChange: isHovered ? "transform, filter" : "auto",
+    }),
+    [isHovered]
+  );
+
+  return (
+    <div
+      className={`rounded-xl overflow-hidden shadow-lg bg-white transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+        isVisible && imageLoaded
+          ? "opacity-100 scale-100 rotate-0 translate-x-0 translate-y-0 blur-0"
+          : "opacity-0 scale-75 blur-sm"
+      }`}
+      style={{
+        aspectRatio: "4/3",
+        contain: "layout style paint",
+        ...animationStyle,
+      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <img
+        src={src}
+        alt={`about-${index}`}
+        className="w-full h-full object-cover transition-all duration-500"
+        style={imageStyle}
+        onLoad={handleImageLoad}
+        loading={index < 4 ? "eager" : "lazy"} // 첫 4개 이미지는 즉시 로드
+        decoding="async"
+      />
+    </div>
+  );
+};
+
 const ThirdPage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const scrollableRef = useRef<HTMLDivElement>(null);
+
+  // 랜덤 transform 값들을 메모이제이션
+  const randomTransforms = useMemo(
+    () => images.map((_, index) => getRandomTransform(index)),
+    []
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -65,6 +147,7 @@ const ThirdPage = () => {
       },
       {
         threshold: 0.1,
+        rootMargin: "50px", // 미리 감지해서 부드러운 애니메이션
       }
     );
 
@@ -80,16 +163,17 @@ const ThirdPage = () => {
     };
   }, []);
 
-  // 스크롤 영역에서 전체 스크롤 제어
+  // 스크롤 영역에서 전체 스크롤 제어 - 디바운싱 최적화
   useEffect(() => {
     const scrollableElement = scrollableRef.current;
     if (!scrollableElement) return;
 
     let isScrollingDisabled = false;
     let scrollTimeout: NodeJS.Timeout;
+    let ticking = false;
 
     const setFullPageScrolling = (enable: boolean) => {
-      if (isScrollingDisabled === !enable) return; // 상태가 같으면 아무것도 하지 않음
+      if (isScrollingDisabled === !enable) return;
 
       isScrollingDisabled = !enable;
       if (window.fullpage_api) {
@@ -116,23 +200,30 @@ const ThirdPage = () => {
       }, 100);
     };
 
-    // 스크롤 끝 감지 - 쓰로틀링 적용
+    // RAF를 사용한 최적화된 스크롤 핸들러
     const handleScroll = () => {
-      // 이전 타이머 클리어
-      clearTimeout(scrollTimeout);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          clearTimeout(scrollTimeout);
 
-      scrollTimeout = setTimeout(() => {
-        const { scrollTop, scrollHeight, clientHeight } = scrollableElement;
-        const isAtBottom =
-          Math.abs(scrollHeight - clientHeight - scrollTop) < 10;
-        const isAtTop = scrollTop < 10;
+          scrollTimeout = setTimeout(() => {
+            const { scrollTop, scrollHeight, clientHeight } = scrollableElement;
+            const isAtBottom =
+              Math.abs(scrollHeight - clientHeight - scrollTop) < 10;
+            const isAtTop = scrollTop < 10;
 
-        if (isAtBottom || isAtTop) {
-          setFullPageScrolling(true);
-        } else {
-          setFullPageScrolling(false);
-        }
-      }, 50); // 50ms 쓰로틀링
+            if (isAtBottom || isAtTop) {
+              setFullPageScrolling(true);
+            } else {
+              setFullPageScrolling(false);
+            }
+          }, 50);
+
+          ticking = false;
+        });
+
+        ticking = true;
+      }
     };
 
     scrollableElement.addEventListener("mouseenter", handleMouseEnter);
@@ -153,11 +244,27 @@ const ThirdPage = () => {
     };
   }, []);
 
+  // 이미지 프리로딩
+  useEffect(() => {
+    const preloadImages = () => {
+      images.slice(0, 4).forEach((src) => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+
+    preloadImages();
+  }, []);
+
   return (
     <div
       ref={scrollableRef}
       className="w-full min-h-full px-4"
-      style={{ minHeight: "100vh" }}
+      style={{
+        minHeight: "100vh",
+        contain: "layout style",
+        transform: "translate3d(0, 0, 0)", // GPU 레이어 강제 생성
+      }}
     >
       <div ref={containerRef} className="w-full">
         <div className="flex items-center mb-6 sticky bg-black/80 backdrop-blur-sm z-10">
@@ -166,33 +273,22 @@ const ThirdPage = () => {
           </h1>
           <span className="text-[6vw] md:text-[6vw]">🍭</span>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 pb-10">
-          {images.map((src, idx) => {
-            const randomTransform = getRandomTransform(idx);
-            return (
-              <div
-                key={idx}
-                className={`rounded-xl overflow-hidden shadow-lg bg-white transition-all duration-[800ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
-                  isVisible
-                    ? "opacity-100 scale-100 rotate-0 translate-x-0 translate-y-0 blur-0"
-                    : "opacity-0 scale-75 blur-sm"
-                }`}
-                style={{
-                  aspectRatio: "4/3",
-                  transitionDelay: isVisible ? `${idx * 80}ms` : "0ms",
-                  transform: !isVisible
-                    ? `translateX(${randomTransform.x}px) translateY(${randomTransform.y}px) rotate(${randomTransform.rotate}deg) scale(0.75)`
-                    : "translateX(0) translateY(0) rotate(0deg) scale(1)",
-                }}
-              >
-                <img
-                  src={src}
-                  alt={`about-${idx}`}
-                  className="w-full h-full object-cover transition-all duration-500 hover:scale-110 hover:brightness-110"
-                />
-              </div>
-            );
-          })}
+        <div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 pb-10"
+          style={{
+            contain: "layout style",
+            transform: "translate3d(0, 0, 0)", // GPU 레이어 강제 생성
+          }}
+        >
+          {images.map((src, idx) => (
+            <OptimizedImage
+              key={idx}
+              src={src}
+              index={idx}
+              isVisible={isVisible}
+              randomTransform={randomTransforms[idx]}
+            />
+          ))}
         </div>
 
         {/* 구분선 */}
@@ -203,6 +299,10 @@ const ThirdPage = () => {
             isVisible ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }
           }
           transition={{ duration: 0.8, delay: 1.2 }}
+          style={{
+            contain: "layout style",
+            transform: "translate3d(0, 0, 0)",
+          }}
         >
           <div className="h-1 bg-gradient-to-r from-transparent via-gray-400/80 to-transparent rounded-full"></div>
         </motion.div>
@@ -213,6 +313,10 @@ const ThirdPage = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
           transition={{ duration: 0.8, delay: 1.5 }}
+          style={{
+            contain: "layout style",
+            transform: "translate3d(0, 0, 0)",
+          }}
         >
           <h2 className="text-1xl md:text-2xl font-bold mb-8 text-gray-200 dark:text-dark-text">
             작은 시작, 큰 연결
@@ -270,6 +374,9 @@ const ThirdPage = () => {
           }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
+          style={{
+            transform: "translate3d(0, 0, 0)",
+          }}
         >
           ↓
         </motion.button>
