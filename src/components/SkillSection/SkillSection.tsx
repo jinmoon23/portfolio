@@ -84,9 +84,11 @@ const skills = [
 ];
 
 const SkillSection = () => (
-  <section className="bg-gray-50 py-10 px-4">
+  <section className="bg-gray-50 dark:bg-gray-900 py-10 px-4 transition-colors">
     <div className="flex justify-between items-center mb-12">
-      <h2 className="text-5xl font-bold">진문의 기술스택</h2>
+      <h2 className="text-5xl font-bold text-gray-900 dark:text-gray-100 transition-colors">
+        이 기술들을 사용해요!
+      </h2>
     </div>
     <div className="flex gap-6 flex-wrap justify-center">
       {skills.map((skill, idx) => (

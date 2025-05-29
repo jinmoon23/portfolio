@@ -10,7 +10,7 @@ const FirstPage = () => {
         {/* 첫 번째 줄 - 왼쪽 정렬 */}
         <div className="flex w-full pl-[5rem] items-center relative group">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight ml-[-5rem] mt-6"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight ml-[-5rem] mt-6 transition-colors"
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -32,7 +32,7 @@ const FirstPage = () => {
         {/* 두 번째 줄 - 가운데 정렬 */}
         <div className="flex justify-center">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -55,7 +55,7 @@ const FirstPage = () => {
             />
           </div>
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -67,7 +67,7 @@ const FirstPage = () => {
         {/* 네 번째 줄 - 왼쪽 정렬 */}
         <div className="flex justify-start items-center relative group">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -87,12 +87,12 @@ const FirstPage = () => {
         </div>
       </div>
       {/* 부제목 */}
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white/90 mb-3 mt-0">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white/90 dark:text-gray-200/90 mb-3 mt-0 transition-colors">
         Creative Developer
       </h2>
 
       {/* 구분선 */}
-      <div className="w-24 h-1 bg-white/50 mb-6"></div>
+      <div className="w-24 h-1 bg-white/50 dark:bg-gray-200/50 mb-6 transition-colors"></div>
 
       {/* 소셜 링크 */}
       <div className="flex gap-4 mt-0">
@@ -100,7 +100,9 @@ const FirstPage = () => {
         <MailLink />
       </div>
       <div className="flex justify-center mt-2 z-10 relative">
-        <span className="animate-bounce text-3xl text-gray-400">↓</span>
+        <span className="animate-bounce text-3xl text-gray-400 dark:text-gray-500 transition-colors">
+          ↓
+        </span>
       </div>
     </div>
   );

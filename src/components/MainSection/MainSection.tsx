@@ -25,7 +25,7 @@ const MainSection = () => {
   };
 
   return (
-    <main className="relative flex items-center justify-center bg-black rounded-3xl mx-4 md:mx-8 h-screen min-h-[700px] max-h-[700px] overflow-hidden">
+    <main className="relative flex items-center justify-center bg-black dark:bg-gray-900 rounded-3xl mx-4 md:mx-8 h-screen min-h-[700px] max-h-[700px] overflow-hidden transition-colors">
       {/* 컨텐츠 컨테이너 */}
       <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-16 py-12">
         <div className="w-full overflow-x-hidden" ref={containerRef}>
