@@ -22,4 +22,22 @@
   .dark .section {
     @apply bg-dark-bg;
   }
+
+  .animate-pulse-gentle {
+    animation: pulse-gentle 3s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  @keyframes pulse-gentle {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+  }
 }

@@ -92,7 +92,7 @@ const FirstPage = () => {
         </h2>
 
         {/* 구분선 */}
-        <div className="w-20 md:w-24 h-1 bg-white/50 dark:bg-gray-200/50 mb-2 md:mb-4 transition-colors"></div>
+        <div className="w-20 md:w-24 h-1 bg-white/50 dark:bg-gray-200/50 md:mb-4 transition-colors"></div>
 
         {/* 소셜 링크 */}
         <div className="flex gap-4">
@@ -102,7 +102,7 @@ const FirstPage = () => {
       </div>
 
       {/* 하단 화살표 - 컴팩트하게 */}
-      <div className="flex justify-center py-2">
+      <div className="flex justify-center -mt-4">
         <motion.span
           className="text-2xl md:text-3xl text-white/70 dark:text-gray-400 transition-colors drop-shadow-lg block"
           animate={{
