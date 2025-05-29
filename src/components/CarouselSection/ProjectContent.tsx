@@ -22,6 +22,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
 }) => {
   // 모바일 디바이스 감지
   const [isMobile, setIsMobile] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const checkIsMobile = () => {
@@ -31,6 +32,9 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
     checkIsMobile();
     window.addEventListener("resize", checkIsMobile);
 
+    // 컴포넌트 마운트 시 애니메이션 트리거
+    setTimeout(() => setIsVisible(true), 100);
+
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
@@ -39,95 +43,364 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
 
   return (
     <div
-      className={`grid grid-cols-1 ${
-        hasMedia ? "lg:grid-cols-2" : ""
-      } gap-6 lg:gap-8`}
+      className={`transition-all duration-1000 transform ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+      }`}
     >
-      {/* 왼쪽: 텍스트 내용 */}
-      <div className="space-y-4 sm:space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2 text-base sm:text-lg font-semibold">
-          <span className="text-gray-600 dark:text-gray-400 transition-colors">
-            {period}
-          </span>
-          <span className="font-bold text-gray-900 dark:text-gray-100 transition-colors">
+      {/* 헤더 섹션 */}
+      <div
+        className={`transform transition-all duration-700 delay-200 mb-6 lg:mb-8 ${
+          isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
+        }`}
+      >
+        <div className="relative p-6 rounded-2xl bg-gradient-to-br from-gray-50/80 to-gray-100/60 dark:from-gray-800/80 dark:to-gray-900/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-lg">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-t-2xl"></div>
+
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse"></div>
+            <span className="px-3 py-1 text-sm font-medium bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-700">
+              {period}
+            </span>
+          </div>
+
+          <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent leading-tight">
             {projectName}
-          </span>
-        </div>
-
-        <div className="space-y-3 sm:space-y-4">
-          <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 transition-colors">
-              본인의 역할:
-            </h3>
-            <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300 transition-colors">
-              {roles.map((role, index) => (
-                <li key={index} className="ml-2 sm:ml-4">
-                  {role}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-base sm:text-lg font-semibold mb-2 text-gray-900 dark:text-gray-100 transition-colors">
-              프로젝트 내용:
-            </h3>
-            <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-sm sm:text-base text-gray-700 dark:text-gray-300 transition-colors">
-              {description.map((item, index) => (
-                <li key={index} className="ml-2 sm:ml-4">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
+          </h2>
         </div>
       </div>
 
-      {/* 오른쪽: 미디어 콘텐츠 */}
+      {/* 모바일: 미디어 콘텐츠 (헤더 바로 밑) */}
       {hasMedia && (
         <div
-          className={`flex ${
-            isVerticalVideo ? "items-start" : "items-center"
-          } ${isVerticalVideo ? "justify-start" : "justify-center"}`}
+          className={`lg:hidden mb-6 lg:mb-8 transform transition-all duration-1000 delay-400 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
         >
-          <div
-            className={`w-full ${
-              isVerticalVideo ? "max-w-xs" : "max-w-md lg:max-w-full"
-            }`}
-          >
-            {/* 영상 렌더링 */}
-            {videoUrl && (
-              <video
-                className={`w-auto h-auto rounded-lg ${
-                  isVerticalVideo
-                    ? "aspect-[9/16] max-h-[500px]" // 9:16 비율 고정 및 최대 높이 제한
-                    : "" // 일반 영상은 원본 비율 유지
-                }`}
-                controls
-                autoPlay={!isMobile} // 모바일에서는 자동재생 비활성화
-                loop
-                muted
-                preload="metadata"
-                poster="/video-thumbnail.jpg"
-              >
-                <source src={videoUrl} type="video/mp4" />
-                <p className="text-gray-600 dark:text-gray-400 text-center p-4">
-                  브라우저에서 이 비디오 형식을 지원하지 않습니다.
-                </p>
-              </video>
-            )}
+          <div className="flex justify-center">
+            <div
+              className={`w-full ${isVerticalVideo ? "max-w-xs" : "max-w-md"}`}
+            >
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
 
-            {/* 이미지 렌더링 */}
-            {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="프로젝트 스크린샷"
-                className="w-full h-auto rounded-lg object-contain max-h-[400px]"
-              />
-            )}
+                <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-2 shadow-2xl">
+                  {/* 영상 렌더링 */}
+                  {videoUrl && (
+                    <video
+                      className={`w-full h-auto rounded-xl ${
+                        isVerticalVideo ? "aspect-[9/16] max-h-[500px]" : ""
+                      } group-hover:scale-[1.02] transition-transform duration-300`}
+                      controls
+                      autoPlay={!isMobile}
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="/video-thumbnail.jpg"
+                    >
+                      <source src={videoUrl} type="video/mp4" />
+                      <p className="text-gray-600 dark:text-gray-400 text-center p-4">
+                        브라우저에서 이 비디오 형식을 지원하지 않습니다.
+                      </p>
+                    </video>
+                  )}
+
+                  {/* 이미지 렌더링 */}
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt="프로젝트 스크린샷"
+                      className="w-full h-auto rounded-xl object-contain max-h-[400px] group-hover:scale-[1.02] transition-transform duration-300"
+                    />
+                  )}
+                </div>
+
+                {/* 미디어 하단 라벨 */}
+                <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
+                  <div className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 text-white text-xs font-medium rounded-full shadow-lg backdrop-blur-sm border border-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {videoUrl ? "프로젝트 데모" : "프로젝트 스크린샷"}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
+
+      {/* 데스크탑: 그리드 레이아웃 */}
+      <div
+        className={`hidden lg:grid ${
+          hasMedia ? "grid-cols-2" : "grid-cols-1"
+        } gap-8 lg:gap-12`}
+      >
+        {/* 왼쪽: 텍스트 내용 */}
+        <div className="space-y-6 lg:space-y-8">
+          {/* 역할 섹션 */}
+          <div
+            className={`transform transition-all duration-700 delay-300 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-8 opacity-0"
+            }`}
+          >
+            <div className="relative p-6 rounded-2xl bg-gradient-to-br from-emerald-50/80 to-teal-100/60 dark:from-emerald-900/20 dark:to-teal-900/20 backdrop-blur-sm border border-emerald-200/50 dark:border-emerald-700/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg">
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+                  본인의 역할
+                </h3>
+              </div>
+
+              <div className="space-y-3">
+                {roles.map((role, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-gray-800/30 border border-emerald-100 dark:border-emerald-800/30 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-md ${
+                      isVisible
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-4 opacity-0"
+                    }`}
+                    style={{ transitionDelay: `${400 + index * 100}ms` }}
+                  >
+                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 mt-2 flex-shrink-0"></div>
+                    <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {role}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* 프로젝트 내용 섹션 */}
+          <div
+            className={`transform transition-all duration-700 delay-500 ${
+              isVisible
+                ? "translate-x-0 opacity-100"
+                : "-translate-x-8 opacity-0"
+            }`}
+          >
+            <div className="relative p-6 rounded-2xl bg-gradient-to-br from-indigo-50/80 to-purple-100/60 dark:from-indigo-900/20 dark:to-purple-900/20 backdrop-blur-sm border border-indigo-200/50 dark:border-indigo-700/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg">
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+                  프로젝트 내용
+                </h3>
+              </div>
+
+              <div className="space-y-3">
+                {description.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-gray-800/30 border border-indigo-100 dark:border-indigo-800/30 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-md ${
+                      isVisible
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-4 opacity-0"
+                    }`}
+                    style={{ transitionDelay: `${600 + index * 100}ms` }}
+                  >
+                    <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 mt-2 flex-shrink-0"></div>
+                    <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 오른쪽: 미디어 콘텐츠 (데스크탑에서만) */}
+        {hasMedia && (
+          <div
+            className={`flex ${
+              isVerticalVideo ? "items-start" : "items-center"
+            } ${
+              isVerticalVideo ? "justify-start" : "justify-center"
+            } transform transition-all duration-1000 delay-700 ${
+              isVisible
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
+            }`}
+          >
+            <div
+              className={`w-full ${
+                isVerticalVideo ? "max-w-xs" : "max-w-md lg:max-w-full"
+              }`}
+            >
+              <div className="relative group">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-300"></div>
+
+                <div className="relative bg-white dark:bg-gray-900 rounded-2xl p-2 shadow-2xl">
+                  {/* 영상 렌더링 */}
+                  {videoUrl && (
+                    <video
+                      className={`w-full h-auto rounded-xl ${
+                        isVerticalVideo ? "aspect-[9/16] max-h-[500px]" : ""
+                      } group-hover:scale-[1.02] transition-transform duration-300`}
+                      controls
+                      autoPlay={!isMobile}
+                      loop
+                      muted
+                      preload="metadata"
+                      poster="/video-thumbnail.jpg"
+                    >
+                      <source src={videoUrl} type="video/mp4" />
+                      <p className="text-gray-600 dark:text-gray-400 text-center p-4">
+                        브라우저에서 이 비디오 형식을 지원하지 않습니다.
+                      </p>
+                    </video>
+                  )}
+
+                  {/* 이미지 렌더링 */}
+                  {imageUrl && (
+                    <img
+                      src={imageUrl}
+                      alt="프로젝트 스크린샷"
+                      className="w-full h-auto rounded-xl object-contain max-h-[400px] group-hover:scale-[1.02] transition-transform duration-300"
+                    />
+                  )}
+                </div>
+
+                {/* 미디어 하단 라벨 */}
+                <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
+                  <div className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 dark:from-gray-700 dark:to-gray-800 text-white text-xs font-medium rounded-full shadow-lg backdrop-blur-sm border border-gray-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {videoUrl ? "프로젝트 데모" : "프로젝트 스크린샷"}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 모바일: 텍스트 섹션들 */}
+      <div className="lg:hidden space-y-6">
+        {/* 역할 섹션 */}
+        <div
+          className={`transform transition-all duration-700 delay-600 ${
+            isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
+          }`}
+        >
+          <div className="relative p-6 rounded-2xl bg-gradient-to-br from-emerald-50/80 to-teal-100/60 dark:from-emerald-900/20 dark:to-teal-900/20 backdrop-blur-sm border border-emerald-200/50 dark:border-emerald-700/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 shadow-lg">
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+                본인의 역할
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              {roles.map((role, index) => (
+                <div
+                  key={index}
+                  className={`flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-gray-800/30 border border-emerald-100 dark:border-emerald-800/30 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-md ${
+                    isVisible
+                      ? "translate-x-0 opacity-100"
+                      : "translate-x-4 opacity-0"
+                  }`}
+                  style={{ transitionDelay: `${700 + index * 100}ms` }}
+                >
+                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 mt-2 flex-shrink-0"></div>
+                  <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {role}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* 프로젝트 내용 섹션 */}
+        <div
+          className={`transform transition-all duration-700 delay-800 ${
+            isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
+          }`}
+        >
+          <div className="relative p-6 rounded-2xl bg-gradient-to-br from-indigo-50/80 to-purple-100/60 dark:from-indigo-900/20 dark:to-purple-900/20 backdrop-blur-sm border border-indigo-200/50 dark:border-indigo-700/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg">
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100">
+                프로젝트 내용
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              {description.map((item, index) => (
+                <div
+                  key={index}
+                  className={`flex items-start gap-3 p-3 rounded-lg bg-white/60 dark:bg-gray-800/30 border border-indigo-100 dark:border-indigo-800/30 transform transition-all duration-500 hover:scale-[1.02] hover:shadow-md ${
+                    isVisible
+                      ? "translate-x-0 opacity-100"
+                      : "translate-x-4 opacity-0"
+                  }`}
+                  style={{ transitionDelay: `${900 + index * 100}ms` }}
+                >
+                  <div className="w-2 h-2 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 mt-2 flex-shrink-0"></div>
+                  <span className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

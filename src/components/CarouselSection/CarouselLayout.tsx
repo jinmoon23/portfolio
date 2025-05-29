@@ -99,25 +99,15 @@ const CarouselLayout = ({
             className="bg-white dark:bg-dark-card rounded-2xl sm:rounded-3xl shadow-2xl w-full max-w-[90vw] sm:max-w-[95vw] md:max-w-[1100px] max-h-[80vh] overflow-y-auto p-4 sm:p-6 md:p-8 border border-gray-200 dark:border-gray-600"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-start mb-4 sm:mb-6">
-              <div className="flex-1 pr-4">
-                <h2 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">
-                  {cardData[selected].title}
-                </h2>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-2 text-gray-900 dark:text-white">
-                  {cardData[selected].subtitle}
-                </h3>
-                <p className="text-sm sm:text-base font-semibold text-gray-600 dark:text-gray-300">
-                  {cardData[selected].serviceName}
-                </p>
-              </div>
-              <button
-                className="text-2xl sm:text-3xl text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-colors flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
-                onClick={() => setSelected(null)}
-              >
-                ×
-              </button>
-            </div>
+            {/* 오른쪽 위 고정 닫기 버튼 */}
+            <button
+              className="sticky top-4 right-4 float-right z-10 text-2xl sm:text-3xl text-gray-900 dark:text-white hover:text-gray-600 dark:hover:text-gray-300 transition-all duration-200 flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-gray-100 dark:hover:bg-gray-700 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-600 hover:scale-110"
+              onClick={() => setSelected(null)}
+            >
+              ×
+            </button>
+
+            <div className="clear-both mb-4 sm:mb-6"></div>
 
             {cardData[selected].projectContent && (
               <ProjectContent {...cardData[selected].projectContent} />
