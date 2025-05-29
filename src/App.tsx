@@ -14,6 +14,7 @@ function App() {
         scrollingSpeed={1000}
         credits={{ enabled: false }}
         scrollOverflow={true}
+        normalScrollElements=".fp-scrollable"
         render={() => {
           return (
             <div id="fullpage" style={{ zIndex: 1 }}>

@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import FirstPage from "./FirstPage";
 import ThirdPage from "./ThirdPage";
 import PageNavigation from "./PageNavigation";
@@ -47,22 +48,48 @@ const MainSection = () => {
       )}
 
       {/* 컨텐츠 컨테이너 */}
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-16 py-12">
-        <div className="w-full overflow-x-hidden" ref={containerRef}>
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-8 md:px-16 py-12 h-full">
+        <div className="w-full h-full overflow-x-hidden" ref={containerRef}>
           <div
-            className="flex transition-transform duration-500 ease-in-out"
+            className="flex h-full transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${currentPage * 100}%)` }}
           >
-            <FirstPage />
-            {/* SecondPage 대신 간단한 페이지 */}
-            <div className="w-full h-full flex-shrink-0 relative flex items-center justify-center">
+            {/* FirstPage - 스크롤 없이 정확한 높이 */}
+            <div className="w-full h-full flex-shrink-0 overflow-hidden">
+              <FirstPage />
+            </div>
+
+            {/* SecondPage - 스크롤 가능한 컨테이너 */}
+            <div className="w-full h-full flex-shrink-0 overflow-y-auto overflow-x-hidden relative flex items-end justify-center pb-4">
               <div className="relative z-10">
-                <span className="animate-bounce text-3xl text-white transition-colors drop-shadow-lg">
+                <motion.span
+                  className="text-3xl text-white transition-colors drop-shadow-lg block"
+                  animate={{
+                    y: [0, -10, 0],
+                  }}
+                  transition={{
+                    duration: 1,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
                   ↓
-                </span>
+                </motion.span>
               </div>
             </div>
-            <ThirdPage />
+
+            {/* ThirdPage - ReactFullpage와 호환되는 스크롤 구조 */}
+            <div
+              className="w-full h-full flex-shrink-0 relative"
+              style={{
+                overflow: currentPage === 2 ? "auto" : "hidden",
+                height: "100%",
+              }}
+            >
+              <div className="w-full h-full overflow-y-auto overflow-x-hidden fp-scrollable">
+                <ThirdPage />
+              </div>
+            </div>
           </div>
         </div>
       </div>

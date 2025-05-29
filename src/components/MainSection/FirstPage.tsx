@@ -5,12 +5,12 @@ import MailLink from "./MailLink";
 
 const FirstPage = () => {
   return (
-    <div className="w-full h-full flex-shrink-0 overflow-hidden flex-col justify-center py-20">
-      <div className="flex flex-col gap-4 md:gap-6">
+    <div className="w-full h-full flex flex-col justify-center px-4">
+      <div className="flex flex-col gap-3 md:gap-4 lg:gap-6 flex-grow justify-center">
         {/* 첫 번째 줄 - 왼쪽 정렬 */}
-        <div className="flex w-full pl-[5rem] items-center relative group mt-1">
+        <div className="flex w-full pl-[5rem] items-center relative group">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight ml-[-5rem] transition-colors"
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white dark:text-gray-100 leading-tight ml-[-5rem] transition-colors"
             initial={{ x: -50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -32,7 +32,7 @@ const FirstPage = () => {
         {/* 두 번째 줄 - 가운데 정렬 */}
         <div className="flex justify-center">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -55,7 +55,7 @@ const FirstPage = () => {
             />
           </div>
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
             initial={{ x: 50, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -67,7 +67,7 @@ const FirstPage = () => {
         {/* 네 번째 줄 - 왼쪽 정렬 */}
         <div className="flex justify-start items-center relative group">
           <motion.h1
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
+            className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white dark:text-gray-100 leading-tight transition-colors"
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -87,12 +87,12 @@ const FirstPage = () => {
         </div>
 
         {/* 부제목 */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-white/90 dark:text-gray-200/90 mb-1 transition-colors">
+        <h2 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-medium text-white/90 dark:text-gray-200/90 mb-1 transition-colors">
           Creative Developer
         </h2>
 
         {/* 구분선 */}
-        <div className="w-24 h-1 bg-white/50 dark:bg-gray-200/50 mb-4 transition-colors"></div>
+        <div className="w-20 md:w-24 h-1 bg-white/50 dark:bg-gray-200/50 mb-2 md:mb-4 transition-colors"></div>
 
         {/* 소셜 링크 */}
         <div className="flex gap-4">
@@ -101,10 +101,21 @@ const FirstPage = () => {
         </div>
       </div>
 
-      <div className="flex justify-center z-10 relative">
-        <span className="animate-bounce text-3xl text-gray-400 dark:text-gray-500 transition-colors">
+      {/* 하단 화살표 - 컴팩트하게 */}
+      <div className="flex justify-center py-2">
+        <motion.span
+          className="text-2xl md:text-3xl text-white/70 dark:text-gray-400 transition-colors drop-shadow-lg block"
+          animate={{
+            y: [0, -8, 0],
+          }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
           ↓
-        </span>
+        </motion.span>
       </div>
     </div>
   );
