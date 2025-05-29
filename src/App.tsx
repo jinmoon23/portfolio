@@ -1,7 +1,4 @@
-import Fullpage, {
-  FullPageSections,
-  FullpageSection,
-} from "@ap.cx/react-fullpage";
+import ReactFullpage from "@fullpage/react-fullpage";
 import Header from "./components/Header/Header";
 import MainSection from "./components/MainSection/MainSection";
 import CarouselSection from "./components/CarouselSection/CarouselSection";
@@ -9,20 +6,26 @@ import SkillSection from "./components/SkillSection/SkillSection";
 
 function App() {
   return (
-    <Fullpage>
-      <FullPageSections>
-        <FullpageSection>
-          <Header />
-          <MainSection />
-        </FullpageSection>
-        <FullpageSection className="flex justify-center items-center h-screen">
-          <CarouselSection />
-        </FullpageSection>
-        <FullpageSection>
-          <SkillSection />
-        </FullpageSection>
-      </FullPageSections>
-    </Fullpage>
+    <ReactFullpage
+      scrollingSpeed={1000}
+      credits={{ enabled: false }}
+      render={() => {
+        return (
+          <div id="fullpage">
+            <div className="section">
+              <Header />
+              <MainSection />
+            </div>
+            <div className="section flex justify-center items-center h-screen">
+              <CarouselSection />
+            </div>
+            <div className="section">
+              <SkillSection />
+            </div>
+          </div>
+        );
+      }}
+    />
   );
 }
 
