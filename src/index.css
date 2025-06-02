@@ -4,9 +4,9 @@
 
 @layer base {
   html {
-    font-family: "Exo 2", "Pretendard Variable", "Pretendard", -apple-system,
-      BlinkMacSystemFont, "system-ui", "Roboto", "Helvetica Neue", "Segoe UI",
-      "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Arial",
+    font-family: 'Exo 2', 'Pretendard Variable', 'Pretendard', -apple-system,
+      BlinkMacSystemFont, 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI',
+      'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Arial',
       sans-serif;
   }
 
@@ -20,7 +20,7 @@
   }
 
   body {
-    @apply bg-white text-gray-900 dark:bg-dark-bg dark:text-dark-text transition-colors duration-200;
+    @apply bg-ivory text-gray-900 dark:bg-dark-bg dark:text-dark-text transition-colors duration-200;
     overflow: hidden;
     font-family: inherit;
   }
@@ -35,9 +35,9 @@
   p,
   span,
   div {
-    font-family: "Exo 2", "Pretendard Variable", "Pretendard", -apple-system,
-      BlinkMacSystemFont, "system-ui", "Roboto", "Helvetica Neue", "Segoe UI",
-      "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Arial",
+    font-family: 'Exo 2', 'Pretendard Variable', 'Pretendard', -apple-system,
+      BlinkMacSystemFont, 'system-ui', 'Roboto', 'Helvetica Neue', 'Segoe UI',
+      'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Arial',
       sans-serif !important;
   }
 

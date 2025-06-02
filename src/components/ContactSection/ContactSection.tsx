@@ -3,10 +3,10 @@ import GithubLink from '../MainSection/GithubLink';
 
 const ContactSection = () => {
   return (
-    <section className='bg-white dark:bg-gray-800 py-8 px-4 sm:px-6 md:px-8 transition-colors'>
+    <section className='bg-ivory dark:bg-gray-800 py-8 px-4 sm:px-6 md:px-8 transition-colors'>
       <div className='h-screen flex items-center justify-center'>
         <div className='max-w-6xl mx-auto w-full'>
-          <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-gray-100 mb-12 transition-colors'>
+          <h2 className='mt-8 sm:mt-0 text-3xl sm:text-4xl md:text-5xl font-bold text-center text-gray-900 dark:text-gray-100 mb-12 transition-colors'>
             연락하기
           </h2>
 

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 interface ProjectContentProps {
   period: string;
   projectName: string;
+  projectDescription: string;
   roles: string[];
   description: string[];
   videoUrl?: string;
@@ -14,6 +15,7 @@ interface ProjectContentProps {
 
 const ProjectContent: React.FC<ProjectContentProps> = ({
   period,
+  projectDescription,
   projectName,
   roles,
   description,
@@ -58,14 +60,32 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
         <div className='relative p-6 rounded-2xl bg-gradient-to-br from-gray-50/80 to-gray-100/60 dark:from-gray-800/80 dark:to-gray-900/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 shadow-lg'>
           <div className='absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-t-2xl'></div>
 
+          {/* 왕관 아이콘 - 상을 받은 프로젝트에만 표시 */}
+          {(projectName === '또가게' || projectName === 'AiTalk') && (
+            <div className='absolute top-4 right-4 transform rotate-12'>
+              <div className='relative'>
+                <div className='absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full blur opacity-75'></div>
+                <svg
+                  className='w-8 h-8 text-yellow-400 relative'
+                  fill='currentColor'
+                  viewBox='0 0 24 24'
+                >
+                  <path d='M2 7l5 5 5-9 5 9 5-5-2 12H4L2 7zm4.5 11a1.5 1.5 0 003 0h3a1.5 1.5 0 003 0' />
+                </svg>
+              </div>
+            </div>
+          )}
+
           <div className='flex items-center gap-3 mb-3'>
             <div className='w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse'></div>
             <span className='px-3 py-1 text-sm font-medium bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 rounded-full border border-blue-200 dark:border-blue-700'>
               {period}
             </span>
           </div>
-
-          <h2 className='text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-gray-200 dark:to-gray-100 bg-clip-text text-transparent leading-tight'>
+          <h3 className='text-base sm:text-lg font-medium text-gray-600 dark:text-gray-400 mb-2'>
+            {projectDescription}
+          </h3>
+          <h2 className='text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 dark:text-white leading-tight'>
             {projectName}
           </h2>
         </div>
@@ -162,7 +182,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
                   </svg>
                 </div>
                 <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100'>
-                  기술 스택
+                  Tech Stack
                 </h3>
               </div>
 
@@ -210,7 +230,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
                   </svg>
                 </div>
                 <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100'>
-                  프로젝트 내용
+                  Project Summary
                 </h3>
               </div>
 
@@ -419,7 +439,7 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
                 </svg>
               </div>
               <h3 className='text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-100'>
-                프로젝트 내용
+                Project Summary
               </h3>
             </div>
 

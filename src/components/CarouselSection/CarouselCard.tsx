@@ -101,6 +101,23 @@ const CarouselCard = ({
 
     {/* 장식적 요소들 - 모바일에서는 투명도 낮춤 */}
     <div className='absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/20 sm:from-white/30 via-white/30 sm:via-white/50 to-white/20 sm:to-white/30'></div>
+
+    {/* 왕관 아이콘 - 상을 받은 프로젝트에만 표시 */}
+    {(serviceName === '또가게' || serviceName === 'AiTalk') && (
+      <div className='absolute top-6 right-6 transform rotate-12 z-20'>
+        <div className='relative'>
+          <div className='absolute -inset-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full blur opacity-75'></div>
+          <svg
+            className='w-6 h-6 text-yellow-400 relative'
+            fill='currentColor'
+            viewBox='0 0 24 24'
+          >
+            <path d='M2 7l5 5 5-9 5 9 5-5-2 12H4L2 7zm4.5 11a1.5 1.5 0 003 0h3a1.5 1.5 0 003 0' />
+          </svg>
+        </div>
+      </div>
+    )}
+
     <div className='absolute -top-20 -right-20 w-40 h-40 bg-white/5 sm:bg-white/10 rounded-full blur-3xl'></div>
     <div className='absolute -bottom-10 -left-10 w-32 h-32 bg-white/3 sm:bg-white/5 rounded-full blur-2xl'></div>
   </div>

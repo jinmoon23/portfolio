@@ -236,12 +236,12 @@ const categories = {
 
 const SkillSection = () => {
   return (
-    <section className='bg-gray-50 dark:bg-gray-900 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 transition-colors'>
+    <section className='bg-ivory dark:bg-gray-900 py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-8 transition-colors'>
       <div className='max-w-7xl mx-auto'>
         <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4'>
           <div>
             <h2 className='text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-100 transition-colors mb-4'>
-              기술 스택
+              Tech Stack
             </h2>
             <p className='text-lg text-gray-600 dark:text-gray-400'>
               다양한 기술을 활용하여 최적의 솔루션을 제공합니다
