@@ -1,20 +1,20 @@
-import type { RandomTransform } from "../types/thirdPage.types";
+import type { RandomTransform } from '../types/thirdPage.types';
 
 // 이미지 경로 배열
 export const THIRD_PAGE_IMAGES = [
-  "about/1.jpeg",
-  "about/2.jpeg",
-  "about/3.jpeg",
-  "about/4.jpeg",
-  "about/5.jpeg",
-  "about/6.jpeg",
-  "about/7.jpeg",
-  "about/8.jpeg",
-  "about/9.jpeg",
-  "about/10.jpeg",
-  "about/11.jpeg",
-  "about/12.jpeg",
-  "about/13.jpeg",
+  'about/1.jpeg',
+  'about/2.jpeg',
+  'about/3.jpeg',
+  'about/4.jpeg',
+  'about/5.jpeg',
+  'about/6.jpeg',
+  'about/7.jpeg',
+  'about/8.jpeg',
+  'about/9.jpeg',
+  'about/10.jpeg',
+  'about/11.jpeg',
+  'about/12.jpeg',
+  'about/13.jpeg',
 ] as const;
 
 // 애니메이션 변환 방향 설정
@@ -38,10 +38,10 @@ export const ANIMATION_DIRECTIONS: RandomTransform[] = [
 export const ANIMATION_CONFIG = {
   STAGGER_DELAY: 80, // ms
   ANIMATION_DURATION: 800, // ms
-  ANIMATION_EASING: "cubic-bezier(0.34,1.56,0.64,1)",
+  ANIMATION_EASING: 'cubic-bezier(0.34,1.56,0.64,1)',
   HOVER_TRANSITION_DURATION: 500, // ms
   INTERSECTION_THRESHOLD: 0.1,
-  INTERSECTION_ROOT_MARGIN: "50px",
+  INTERSECTION_ROOT_MARGIN: '50px',
 } as const;
 
 // 스크롤 제어 설정
@@ -54,11 +54,11 @@ export const SCROLL_CONFIG = {
 
 // About Me 텍스트 내용
 export const ABOUT_ME_CONTENT = {
-  title: "작은 시작, 큰 연결",
+  title: '작은 시작, 큰 연결',
   paragraphs: [
-    "프론트엔드 개발자로서, 작은 디테일이 사용자 경험을 더욱 풍부하게 만들고 자연스러운 소통을 이끌어낸다고 믿습니다. 화면의 섬세한 요소와 직관적인 상호작용을 통해, 더 많은 사람들이 편리하고 즐겁게 사용할 수 있는 서비스를 만들기 위해 꾸준히 고민하고 있습니다.",
-    "모든 개인은 자신만의 특별한 추억과 경험을 가지고 있습니다. 각자의 특별함이 모여 더 나은 세상을 만들어가는 것처럼, 저는 이러한 특별함을 기술로 연결하고 내일로 이어질 수 있는 서비스를 개발하고자 합니다.",
-    "'사용자들이 어떤 서비스를 필요로 할까?', '어떤 경험이 특별하게 다가올까?'와 같은 질문들을 탐험들과 함께 고민하며, 더 나은 결과를 만들어내기 위해 노력합니다.",
-    "사용자 피드백을 기반으로 기술을 개선하고, 테스트를 통해 부족한 부분을 보완하며, 점진적으로 발전하는 서비스를 만드는 것이 저의 목표입니다. 이렇게 사용자와 팀 모두가 만족할 수 있는 결과를 함께 이루어가고 싶습니다.",
+    '프론트엔드 개발자로서 작은 디테일 하나하나가 전체 사용자 경험을 결정짓는 핵심임을 믿습니다. 화면의 미세한 요소와 세심하게 설계된 상호작용은 사용자에게 단순한 편리함을 넘어, 감동과 즐거움을 선사할 수 있다고 생각합니다. 저는 이러한 섬세한 경험을 통해 더 많은 사람들이 직관적으로, 그리고 자연스럽게 소통할 수 있는 서비스를 만들기 위해 끊임없이 고민하고 있습니다.',
+    '모든 개인은 자신만의 소중한 추억과 경험을 지니고 있습니다. 각자의 특별함이 모여 더 나은 세상을 만들어가듯, 저는 기술을 통해 사람들의 특별한 경험이 자연스럽게 연결되고, 내일로 이어질 수 있는 서비스를 개발하고자 합니다.',
+    "'사용자들이 진정으로 원하는 서비스는 무엇일까?', '어떤 경험이 일상 속에서 특별한 기억으로 남을 수 있을까?'와 같은 질문을 늘 마음에 품고, 다양한 시도와 탐구를 이어가고 있습니다.",
+    '저는 사용자 피드백을 가장 소중한 성장의 자산으로 여기며, 이를 바탕으로 기술을 지속적으로 개선하고, 꼼꼼한 테스트를 통해 부족한 부분을 보완합니다. 점진적으로 발전하는 서비스를 통해, 사용자와 팀 모두가 진정으로 만족할 수 있는 결과를 함께 만들어가고 싶습니다.',
   ],
 } as const;
