@@ -1,5 +1,5 @@
-import CarouselLayout from "./CarouselLayout";
-import { cardData } from "./CarouselContent";
+import CarouselLayout from './CarouselLayout';
+import { cardData } from './CarouselContent';
 
 interface CarouselProps {
   containerRef: React.RefObject<HTMLDivElement | null>;
