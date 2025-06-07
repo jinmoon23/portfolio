@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useState, useEffect } from 'react';
-import ProjectDetailSlider from './ProjectDetailSlider';
-import TroubleShootingSlider from './TroubleShootingSlider';
 import { projectImages } from './projectData';
+
+// 동적 임포트 적용
+const ProjectDetailSlider = React.lazy(() => import('./ProjectDetailSlider'));
+const TroubleShootingSlider = React.lazy(
+  () => import('./TroubleShootingSlider')
+);
 
 interface ProjectContentProps {
   period: string;
@@ -404,12 +408,28 @@ const ProjectContent: React.FC<ProjectContentProps> = ({
             </div>
           </div>
         ) : currentSlider === 'detail' ? (
-          <ProjectDetailSlider images={detailImages} isVisible={true} />
+          <Suspense
+            fallback={
+              <div className='flex items-center justify-center min-h-[400px]'>
+                <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500'></div>
+              </div>
+            }
+          >
+            <ProjectDetailSlider images={detailImages} isVisible={true} />
+          </Suspense>
         ) : (
-          <TroubleShootingSlider
-            items={projectTroubleshootingItems}
-            isVisible={true}
-          />
+          <Suspense
+            fallback={
+              <div className='flex items-center justify-center min-h-[400px]'>
+                <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500'></div>
+              </div>
+            }
+          >
+            <TroubleShootingSlider
+              items={projectTroubleshootingItems}
+              isVisible={true}
+            />
+          </Suspense>
         )}
       </div>
     </div>
