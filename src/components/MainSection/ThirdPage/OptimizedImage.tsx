@@ -1,13 +1,13 @@
-import { useState, useCallback, useMemo, memo } from "react";
-import type { OptimizedImageProps } from "../../../types/thirdPage.types";
+import { useState, useCallback, useMemo, memo } from 'react';
+import type { OptimizedImageProps } from '../../../types/thirdPage.types';
 import {
   createAnimationStyle,
   createImageStyle,
-} from "../../../utils/thirdPage.utils";
+} from '../../../utils/thirdPage.utils';
 import {
   ANIMATION_CONFIG,
   SCROLL_CONFIG,
-} from "../../../constants/thirdPage.constants";
+} from '../../../constants/thirdPage.constants';
 
 const OptimizedImage = memo(
   ({ src, index, isVisible, randomTransform }: OptimizedImageProps) => {
@@ -40,12 +40,13 @@ const OptimizedImage = memo(
           ANIMATION_CONFIG.ANIMATION_DURATION
         }ms] ease-[${ANIMATION_CONFIG.ANIMATION_EASING}] ${
           isVisible && imageLoaded
-            ? "opacity-100 scale-100 rotate-0 translate-x-0 translate-y-0 blur-0"
-            : "opacity-0 scale-75 blur-sm"
+            ? 'opacity-100 scale-100 rotate-0 translate-x-0 translate-y-0 blur-0'
+            : 'opacity-0 scale-75 blur-sm'
         }`}
         style={{
-          aspectRatio: "4/3",
-          contain: "layout style paint",
+          width: '100%',
+          height: '100%',
+          position: 'relative',
           ...animationStyle,
         }}
         onMouseEnter={handleMouseEnter}
@@ -57,14 +58,14 @@ const OptimizedImage = memo(
           className={`w-full h-full object-cover transition-all duration-[${ANIMATION_CONFIG.HOVER_TRANSITION_DURATION}ms]`}
           style={imageStyle}
           onLoad={handleImageLoad}
-          loading={index < SCROLL_CONFIG.EAGER_LOAD_COUNT ? "eager" : "lazy"}
-          decoding="async"
+          loading={index < SCROLL_CONFIG.EAGER_LOAD_COUNT ? 'eager' : 'lazy'}
+          decoding='async'
         />
       </div>
     );
   }
 );
 
-OptimizedImage.displayName = "OptimizedImage";
+OptimizedImage.displayName = 'OptimizedImage';
 
 export default OptimizedImage;
