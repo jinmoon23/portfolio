@@ -12,11 +12,13 @@
   "dependencies": {
     "@ap.cx/react-fullpage": "^0.3.0",
     "@fullpage/react-fullpage": "^0.1.48",
-    "framer-motion": "^12.15.0",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "framer-motion": "^12.16.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.6.1",
+    "react-syntax-highlighter": "^15.6.1",
     "react-tabs": "^6.1.0",
     "yarn": "^1.22.22"
   },
