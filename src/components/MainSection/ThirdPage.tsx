@@ -8,6 +8,8 @@ import {
 } from '../../hooks';
 import { ImageGrid, AboutMeText, ScrollToNextButton } from './ThirdPage/index';
 import Achievements from './ThirdPage/Achievements';
+import Education from './ThirdPage/Education';
+import MilitaryService from './ThirdPage/MilitaryService';
 
 const ThirdPage = () => {
   // 커스텀 훅들을 사용하여 로직 분리
@@ -44,8 +46,14 @@ const ThirdPage = () => {
           randomTransforms={randomTransforms}
         />
 
+        {/* 군 복무 섹션 */}
+        <MilitaryService isVisible={isVisible} />
+
         {/* 자격증 및 수상내역 섹션 */}
         <Achievements isVisible={isVisible} />
+
+        {/* 교육 정보 섹션 */}
+        <Education isVisible={isVisible} />
 
         {/* About Me 텍스트 섹션 */}
         <AboutMeText isVisible={isVisible} />

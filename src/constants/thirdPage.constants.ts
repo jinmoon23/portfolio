@@ -62,3 +62,47 @@ export const ABOUT_ME_CONTENT = {
     '저는 사용자 피드백을 가장 소중한 성장의 자산으로 여기며, 이를 바탕으로 기술을 지속적으로 개선하고, 꼼꼼한 테스트를 통해 부족한 부분을 보완합니다. 점진적으로 발전하는 서비스를 통해, 사용자와 팀 모두가 진정으로 만족할 수 있는 결과를 함께 만들어가고 싶습니다.',
   ],
 } as const;
+
+export const EDUCATION_INFO = {
+  title: 'Education & Experience',
+  items: [
+    {
+      school: '삼성청년SW/AI아카데미',
+      degree: '파이썬 Full Stack 개발 역량 기반 AI 심화 기능 개발',
+      period: '2024.07 - 2025.07',
+      location: '부산광역시 강서구',
+    },
+    {
+      school: 'iOS 앱개발 부트캠프',
+      degree: '내일배움캠프',
+      period: '2024.02 - 2024.07',
+      location: '서울특별시 강남구',
+    },
+    {
+      school: '동아대학교',
+      degree: '경영학과',
+      period: '2014 - 2018',
+      location: '부산광역시 서구',
+    },
+    {
+      school: '부산동성고등학교',
+      degree: '인문계열',
+      period: '2011 - 2014',
+      location: '부산광역시 부산진구',
+    },
+  ],
+};
+
+export const MILITARY_INFO = {
+  title: 'Military Service',
+  items: [
+    {
+      rank: 'OFFICER',
+      position: '대한민국 육군 장교 중위 전역',
+      period: '2018.03 - 2020.06',
+      location: '경기도 여주시 / 강원도 홍천시',
+      description:
+        '대한민국 육군 기갑 장교로 복무하며 리더십과 책임감을 배웠습니다. 소대장으로서 부대 작전 및 행정 업무를 담당하며, 다양한 상황에서의 의사결정 능력과 팀워크를 향상할 수 있었습니다.',
+    },
+  ],
+};
